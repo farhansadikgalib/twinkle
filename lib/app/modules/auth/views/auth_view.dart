@@ -12,6 +12,12 @@ class AuthView extends GetView<AuthController> {
     return Scaffold(
       body: Center(
         child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.blue,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(9),
+            ),
+          ),
           onPressed: () async {
             User? user = await controller.signInWithGoogle();
             if (user != null) {
@@ -21,7 +27,10 @@ class AuthView extends GetView<AuthController> {
               });
             }
           },
-          child: const Text('Sign in with Google'),
+          child: const Text(
+            'Continue with Google',
+            style: TextStyle(color: Colors.white),
+          ),
         ),
       ),
     );

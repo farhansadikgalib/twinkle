@@ -4,10 +4,16 @@ class FirestoreService {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
   Stream<QuerySnapshot> getMessages(String groupId) {
-    return _db.collection('groups').doc(groupId).collection('messages').orderBy('timestamp').snapshots();
+    return _db
+        .collection('groups')
+        .doc(groupId)
+        .collection('messages')
+        .orderBy('timestamp')
+        .snapshots();
   }
 
-  Future<void> sendMessage(String groupId, String message, String userName) async {
+  Future<void> sendMessage(
+      String groupId, String message, String userName) async {
     await _db.collection('groups').doc(groupId).collection('messages').add({
       'text': message,
       'userName': userName,
@@ -19,7 +25,8 @@ class FirestoreService {
     return _db.collection('users').doc(userName).get();
   }
 
-  Future<void> createUser(String userName, String? email, String? displayName) async {
+  Future<void> createUser(
+      String userName, String? email, String? displayName) async {
     await _db.collection('users').doc(userName).set({
       'email': email,
       'displayName': displayName,
@@ -36,7 +43,8 @@ class FirestoreService {
     });
   }
 
-  Future<void> updateTypingStatus(String groupId, String userName, bool isTyping) async {
+  Future<void> updateTypingStatus(
+      String groupId, String userName, bool isTyping) async {
     final docRef = _db.collection('groups').doc(groupId);
     final doc = await docRef.get();
     if (doc.exists) {
@@ -46,5 +54,3 @@ class FirestoreService {
     }
   }
 }
-
-

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../controllers/chat_controller.dart';
 
@@ -39,12 +40,12 @@ class ChatView extends GetView<ChatController> {
                     alignment:
                         isSender ? Alignment.centerLeft : Alignment.centerRight,
                     child: Container(
-                      padding: const EdgeInsets.all(8.0),
-                      margin: const EdgeInsets.symmetric(
-                          vertical: 2.0, horizontal: 8.0),
+                      padding: REdgeInsets.all(8.0),
+                      margin:
+                          REdgeInsets.symmetric(vertical: 2.0, horizontal: 8.0),
                       decoration: BoxDecoration(
                         color: isSender ? Colors.blue[100] : Colors.green[100],
-                        borderRadius: BorderRadius.circular(8.0),
+                        borderRadius: BorderRadius.circular(8.0).r,
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,12 +65,6 @@ class ChatView extends GetView<ChatController> {
                 },
               ),
             ),
-            controller.isTyping.value
-                ? const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text('Someone is typing...'),
-                  )
-                : Container(),
             Padding(
               padding: EdgeInsets.only(
                 bottom: MediaQuery.of(context).viewInsets.bottom,
@@ -83,7 +78,9 @@ class ChatView extends GetView<ChatController> {
                         cursorColor: Colors.blue,
                         controller: controller.messageController,
                         decoration: InputDecoration(
-                          hintText: 'Enter your message',
+                          hintText: controller.isTyping.value
+                              ? 'Someone is typing...'
+                              : 'Enter your message',
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8.0),
                             borderSide: const BorderSide(

@@ -6,6 +6,7 @@ import '../controllers/splash_controller.dart';
 
 class SplashView extends GetView<SplashController> {
   const SplashView({super.key});
+
   @override
   Widget build(BuildContext context) {
     controller.onInit();
@@ -13,7 +14,8 @@ class SplashView extends GetView<SplashController> {
       body: Center(
         child: Text(
           'Twinkle ⭐',
-          style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
+          style: TextStyle(
+              fontSize: 18, fontWeight: FontWeight.bold, color: Colors.blue),
         ),
       ),
     );
