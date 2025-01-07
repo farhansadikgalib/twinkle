@@ -8,6 +8,7 @@ class SplashView extends GetView<SplashController> {
   const SplashView({super.key});
   @override
   Widget build(BuildContext context) {
+    controller.onInit();
     return Scaffold(
       appBar: AppBar(
         title: const Text('SplashView'),

@@ -40,7 +40,10 @@ dependencies:
   firebase_crashlytics:
   firebase_messaging:
   firebase_remote_config:
+  google_sign_in:
+  firebase_auth:
   flutter_easyloading:
+
   flutter_screenutil:
   google_fonts:
   logger:

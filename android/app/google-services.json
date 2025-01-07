@@ -7,12 +7,25 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:178102738420:android:fec43a0f93ca7aa7a0ada1",
+        "mobilesdk_app_id": "1:178102738420:android:ff1b3d20e9170918a0ada1",
         "android_client_info": {
           "package_name": "com.farhan.twinkle"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "178102738420-g1om90r5lnesph3arsohl3citqq8h898.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.farhan.twinkle",
+            "certificate_hash": "1224a5b178e791ce1c31d428dbbf69c692d7b360"
+          }
+        },
+        {
+          "client_id": "178102738420-2g5fp33g5hod52fid4sk5b648gtlugac.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyB6H26qi7HKCdpAE3VzkwICx43eBzXdk1o"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "178102738420-2g5fp33g5hod52fid4sk5b648gtlugac.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

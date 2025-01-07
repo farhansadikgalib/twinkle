@@ -1,23 +1,16 @@
 import 'package:get/get.dart';
 
-class SplashController extends GetxController {
-  //TODO: Implement SplashController
+import '../../../routes/app_pages.dart';
 
-  final count = 0.obs;
+class SplashController extends GetxController {
+
   @override
   void onInit() {
     super.onInit();
+    Future.delayed(
+      2.seconds,
+          () => Get.offNamed(Routes.AUTH),
+    );
   }
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }

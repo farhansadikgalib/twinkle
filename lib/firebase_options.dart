@@ -54,9 +54,10 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyB6H26qi7HKCdpAE3VzkwICx43eBzXdk1o',
-    appId: '1:178102738420:android:fec43a0f93ca7aa7a0ada1',
+    appId: '1:178102738420:android:ff1b3d20e9170918a0ada1',
     messagingSenderId: '178102738420',
     projectId: 'twinkle-237f4',
     storageBucket: 'twinkle-237f4.firebasestorage.app',
   );
+
 }
