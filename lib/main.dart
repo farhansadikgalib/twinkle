@@ -4,7 +4,6 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -54,7 +53,6 @@ Future<void> main() async {
           title: "Twinkle",
           debugShowCheckedModeBanner: false,
           initialRoute: AppPages.INITIAL,
-          builder: EasyLoading.init(),
           theme: ThemeData(
             useMaterial3: true,
             textTheme: GoogleFonts.poppinsTextTheme(

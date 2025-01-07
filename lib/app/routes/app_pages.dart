@@ -18,16 +18,19 @@ class AppPages {
       name: _Paths.SPLASH,
       page: () => const SplashView(),
       binding: SplashBinding(),
+      transition: Transition.cupertino,
     ),
     GetPage(
       name: _Paths.AUTH,
       page: () => const AuthView(),
       binding: AuthBinding(),
+      transition: Transition.cupertino,
     ),
     GetPage(
       name: _Paths.CHAT,
       page: () => const ChatView(),
       binding: ChatBinding(),
+      transition: Transition.cupertino,
     ),
   ];
 }

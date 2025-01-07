@@ -10,6 +10,8 @@ class ChatController extends GetxController {
   final isTyping = false.obs;
   late String groupId;
   late String userName;
+  final ScrollController scrollController = ScrollController();
+  final GlobalKey<AnimatedListState> listKey = GlobalKey<AnimatedListState>();
 
   @override
   void onInit() {

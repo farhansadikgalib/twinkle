@@ -41,6 +41,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.1"
+  cloud_firestore:
+    dependency: "direct main"
+    description:
+      name: cloud_firestore
+      sha256: ba89d4ae6ddaea0241f50a2dc1ffe36f32891f1a6bc78540f55d79c7f8ed536a
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.6.0"
+  cloud_firestore_platform_interface:
+    dependency: transitive
+    description:
+      name: cloud_firestore_platform_interface
+      sha256: "966cfd6beb2e943f3363a7bced4476533caa55d2338ffd876855c07e5296d1d7"
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.6.0"
+  cloud_firestore_web:
+    dependency: transitive
+    description:
+      name: cloud_firestore_web
+      sha256: "110ba7ff3322c239527e5be3c0d471a3e14fd0a870b2feff96d1e527a2eae2bb"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.4.0"
   collection:
     dependency: transitive
     description:
@@ -198,14 +222,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_easyloading:
-    dependency: "direct main"
-    description:
-      name: flutter_easyloading
-      sha256: ba21a3c883544e582f9cc455a4a0907556714e1e9cf0eababfcb600da191d17c
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.5"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -222,14 +238,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.9.3"
-  flutter_spinkit:
-    dependency: transitive
-    description:
-      name: flutter_spinkit
-      sha256: d2696eed13732831414595b98863260e33e8882fc069ee80ec35d4ac9ddb0472
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.2.1"
   flutter_test:
     dependency: "direct dev"
     description: flutter

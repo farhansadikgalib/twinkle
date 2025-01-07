@@ -10,17 +10,13 @@ class AuthView extends GetView<AuthController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('AuthView'),
-        centerTitle: true,
-      ),
       body: Center(
         child: ElevatedButton(
           onPressed: () async {
             User? user = await controller.signInWithGoogle();
             if (user != null) {
               Get.offAllNamed(Routes.CHAT, arguments: {
-                'groupId': 'farDroid',
+                'groupId': 'TwinkleChatGroup',
                 'userName': user.displayName
               });
             }

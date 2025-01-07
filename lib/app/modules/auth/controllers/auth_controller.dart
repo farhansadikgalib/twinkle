@@ -14,7 +14,7 @@ class AuthController extends GetxController {
     try {
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
       if (googleUser == null) {
-        return null; // The user canceled the sign-in
+        return null;
       }
 
       final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
@@ -27,10 +27,8 @@ class AuthController extends GetxController {
       final User? user = userCredential.user;
 
       if (user != null) {
-        // Check Firestore for user data
         final DocumentSnapshot userDoc = await _firestoreService.getUserData(user.displayName!);
         if (!userDoc.exists) {
-          // If user data does not exist, create it
           await _firestoreService.createUser(user.displayName!, user.email, user.displayName);
         }
       }
