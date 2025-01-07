@@ -7,35 +7,44 @@ class FirestoreService {
     return _db.collection('groups').doc(groupId).collection('messages').orderBy('timestamp').snapshots();
   }
 
-  Future<void> sendMessage(String groupId, String message, String userId) async {
+  Future<void> sendMessage(String groupId, String message, String userName) async {
     await _db.collection('groups').doc(groupId).collection('messages').add({
       'text': message,
-      'userName': userId,
+      'userName': userName,
       'timestamp': FieldValue.serverTimestamp(),
     });
   }
 
-  Future<DocumentSnapshot> getUserData(String userId) async {
-    return _db.collection('users').doc(userId).get();
+  Future<DocumentSnapshot> getUserData(String userName) async {
+    return _db.collection('users').doc(userName).get();
   }
 
-  Future<void> createUser(String userId, String? email, String? displayName) async {
-    await _db.collection('users').doc(userId).set({
+  Future<void> createUser(String userName, String? email, String? displayName) async {
+    await _db.collection('users').doc(userName).set({
       'email': email,
       'displayName': displayName,
       'createdAt': FieldValue.serverTimestamp(),
     });
   }
 
-  Stream<bool> getTypingStatus(String groupId) {
+  Stream<Map<String, dynamic>> getTypingStatus(String groupId) {
     return _db.collection('groups').doc(groupId).snapshots().map((doc) {
-      return doc.data()?['isTyping'] ?? false;
+      return {
+        'isTyping': doc.data()?['isTyping'] ?? false,
+        'userName': doc.data()?['userName'] ?? '',
+      };
     });
   }
 
-  Future<void> updateTypingStatus(String groupId, bool isTyping) async {
-    await _db.collection('groups').doc(groupId).update({
-      'isTyping': isTyping,
-    });
+  Future<void> updateTypingStatus(String groupId, String userName, bool isTyping) async {
+    final docRef = _db.collection('groups').doc(groupId);
+    final doc = await docRef.get();
+    if (doc.exists) {
+      await docRef.update({'isTyping': isTyping, 'userName': userName});
+    } else {
+      await docRef.set({'isTyping': isTyping, 'userName': userName});
+    }
   }
 }
+
+

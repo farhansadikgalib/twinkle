@@ -28,13 +28,11 @@ class AuthController extends GetxController {
 
       if (user != null) {
         // Check Firestore for user data
-        final DocumentSnapshot userDoc = await _firestoreService.getUserData(user.uid);
+        final DocumentSnapshot userDoc = await _firestoreService.getUserData(user.displayName!);
         if (!userDoc.exists) {
           // If user data does not exist, create it
-          await _firestoreService.createUser(user.uid, user.email, user.displayName);
+          await _firestoreService.createUser(user.displayName!, user.email, user.displayName);
         }
-
-
       }
 
       return user;

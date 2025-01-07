@@ -9,30 +9,32 @@ class ChatController extends GetxController {
   final messageController = TextEditingController();
   final isTyping = false.obs;
   late String groupId;
-  late String userId;
+  late String userName;
 
   @override
   void onInit() {
     super.onInit();
     groupId = Get.arguments['groupId'];
-    userId = Get.arguments['userName'];
+    userName = Get.arguments['userName'];
     _firestoreService.getMessages(groupId).listen((snapshot) {
       messages.value = snapshot.docs;
     });
     _firestoreService.getTypingStatus(groupId).listen((status) {
-      isTyping.value = status;
+      if (status['userName'] != userName) {
+        isTyping.value = status['isTyping'];
+      }
     });
   }
 
   void sendMessage() {
     if (messageController.text.isNotEmpty) {
-      _firestoreService.sendMessage(groupId, messageController.text, userId);
+      _firestoreService.sendMessage(groupId, messageController.text, userName);
       messageController.clear();
-      _firestoreService.updateTypingStatus(groupId, false);
+      _firestoreService.updateTypingStatus(groupId, userName, false);
     }
   }
 
   void updateTypingStatus(bool typing) {
-    _firestoreService.updateTypingStatus(groupId, typing);
+    _firestoreService.updateTypingStatus(groupId, userName, typing);
   }
 }
