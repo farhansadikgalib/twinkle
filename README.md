@@ -36,10 +36,22 @@ The `FirestoreService` class handles all interactions with Firebase Firestore, i
 
 To get started with this project, follow these steps:
 
-1. **Clone the repository**: `git clone https://github.com/yourgithubusername/flutter-firebase-chat-app.git`
+1. **Clone the repository**: `git clone https://github.com/farhansadikgalib/twinkle.git`
 2. **Install dependencies**: Run `flutter pub get` in the project directory.
 3. **Setup Firebase**: Ensure that your Firebase project is set up and that the `firebase_options.dart` file is correctly configured for your environment.
 4. **Run the app**: Execute `flutter run` in the terminal within the project directory to launch the application on your device or emulator.
+
+
+## Screenshots
+
+[splash]: https://github.com/farhansadikgalib/twinkle/blob/master/ss/splash.png
+[auth  ]: https://github.com/farhansadikgalib/twinkle/blob/master/ss/auth.png
+[chat  ]: https://github.com/farhansadikgalib/twinkle/blob/master/ss/chat.png
+
+
+|    Splash screen      |    Auth Page  |   Chat Page |
+| ------------- |:-------------: |------------- |
+|![alt text][splash]  | ![alt text][auth] |![alt text][chat] |
 
 ## Contributions
 
@@ -50,3 +62,4 @@ Contributions are welcome! If you have improvements or bug fixes, please fork th
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
+#FlutterFirebaseChat #RealTimeChatApp #FlutterChatApp #FirebaseMessaging #FlutterDevs
