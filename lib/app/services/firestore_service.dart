@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
 class FirestoreService {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
@@ -51,6 +52,25 @@ class FirestoreService {
       await docRef.update({'isTyping': isTyping, 'userName': userName});
     } else {
       await docRef.set({'isTyping': isTyping, 'userName': userName});
+    }
+  }
+  Future<void> deleteMessage(String groupId, String messageId) async {
+    try {
+      await _db.collection('groups').doc(groupId).collection('messages').doc
+        (messageId).delete();
+    } catch (e) {
+      debugPrint('Error deleting message: $e');
+    }
+  }
+
+  Future<void> updateMessage(String groupId, String messageId, String newText) async {
+    try {
+      await _db.collection('groups').doc(groupId).collection('messages').doc(messageId).update({
+        'text': newText,
+        'timestamp': FieldValue.serverTimestamp(),
+      });
+    } catch (e) {
+      debugPrint('Error updating message: $e');
     }
   }
 }

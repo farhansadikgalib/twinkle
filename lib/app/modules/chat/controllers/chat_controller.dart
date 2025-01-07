@@ -1,12 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../services/firestore_service.dart';
 
 class ChatController extends GetxController {
   final FirestoreService _firestoreService = FirestoreService();
-  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
   final messages = <QueryDocumentSnapshot>[].obs;
   final messageController = TextEditingController();
   final isTyping = false.obs;
@@ -35,8 +33,15 @@ class ChatController extends GetxController {
       _firestoreService.sendMessage(groupId, messageController.text, userName);
       messageController.clear();
       _firestoreService.updateTypingStatus(groupId, userName, false);
-
     }
+  }
+
+  void deleteMessage(String messageId) {
+    _firestoreService.deleteMessage(groupId, messageId);
+  }
+
+  void updateMessage(String messageId, String newText) {
+    _firestoreService.updateMessage(groupId, messageId, newText);
   }
 
   void updateTypingStatus(bool typing) {
