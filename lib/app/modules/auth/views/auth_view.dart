@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../routes/app_pages.dart';
 import '../controllers/auth_controller.dart';
 
 class AuthView extends GetView<AuthController> {
@@ -18,7 +19,10 @@ class AuthView extends GetView<AuthController> {
           onPressed: () async {
             User? user = await controller.signInWithGoogle();
             if (user != null) {
-              Get.toNamed('/home'); // Navigate to home page
+              Get.offAllNamed(Routes.CHAT, arguments: {
+                'groupId': 'farDroid',
+                'userName': user.displayName
+              });
             }
           },
           child: const Text('Sign in with Google'),
