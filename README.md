@@ -1,6 +1,6 @@
 ---
 
-# Flutter Firebase Chat Application
+# Twinkle - A Flutter Firebase Chat Application
 
 This repository contains the code for a chat application built with Flutter and Firebase. It features real-time messaging, user authentication, message editing, a typing indicator, and a responsive user interface that adapts to different screen sizes and orientations.
 
