@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "178102738420",
+    "project_id": "twinkle-237f4",
+    "storage_bucket": "twinkle-237f4.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:178102738420:android:fec43a0f93ca7aa7a0ada1",
+        "android_client_info": {
+          "package_name": "com.farhan.twinkle"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6H26qi7HKCdpAE3VzkwICx43eBzXdk1o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
