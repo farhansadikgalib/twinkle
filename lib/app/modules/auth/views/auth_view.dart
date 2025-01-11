@@ -21,10 +21,12 @@ class AuthView extends GetView<AuthController> {
           onPressed: () async {
             User? user = await controller.signInWithGoogle();
             if (user != null) {
-              Get.offAllNamed(Routes.CHAT, arguments: {
-                'groupId': 'TwinkleChatGroup',
+        /*      Get.offAllNamed(Routes.CHAT, arguments: {
+                'groupId': 'TwinkleChat',
                 'userName': user.displayName
-              });
+              });*/
+
+              Get.offAllNamed(Routes.CHAT_LIST);
             }
           },
           child: const Text(

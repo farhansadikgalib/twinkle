@@ -27,9 +27,9 @@ class AuthController extends GetxController {
       final User? user = userCredential.user;
 
       if (user != null) {
-        final DocumentSnapshot userDoc = await _firestoreService.getUserData(user.displayName!);
+        final DocumentSnapshot userDoc = await _firestoreService.getUserData(user.uid);
         if (!userDoc.exists) {
-          await _firestoreService.createUser(user.displayName!, user.email, user.displayName);
+          await _firestoreService.createUser(user.uid, user.email, user.displayName, user.photoURL);
         }
       }
 

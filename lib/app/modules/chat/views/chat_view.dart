@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../controllers/chat_controller.dart';
 
@@ -20,8 +19,14 @@ class ChatView extends GetView<ChatController> {
       return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+            onPressed: () {
+              Get.back();
+            },
+          ),
           backgroundColor: Colors.blue.withOpacity(0.8),
-          title: const Text('Twinkle Group',
+          title: Text(Get.arguments['groupName'].toString(),
               style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
           centerTitle: true,
         ),
@@ -34,34 +39,54 @@ class ChatView extends GetView<ChatController> {
                 itemCount: controller.messages.length,
                 itemBuilder: (context, index) {
                   final message = controller.messages[index];
-                  final isSender = message['userName'] == controller.userName;
+                  final isSender = message['userName'] == controller.userName.value;
                   final messageWidget = FractionallySizedBox(
                     widthFactor: 0.8,
-                    alignment: isSender ? Alignment.centerLeft : Alignment.centerRight,
+                    alignment: isSender ? Alignment.centerRight : Alignment.centerLeft,
                     child: GestureDetector(
                       onLongPress: isSender
                           ? () {
-                              _showEditDialog(context, message.id, message['text']);
+                              _showEditDialog(context, message['id'], message['text']);
                             }
                           : null,
-                      child: Container(
-                        padding: REdgeInsets.all(8.0),
-                        margin: REdgeInsets.symmetric(vertical: 2.0, horizontal: 8.0),
-                        decoration: BoxDecoration(
-                          color: isSender ? Colors.blue[100] : Colors.green[100],
-                          borderRadius: BorderRadius.circular(8.0).r,
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Text(
-                              message['userName'],
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: isSender ? Colors.blue : Colors.green,
+                            if (!isSender && message['photoURL'] != null)
+                              CircleAvatar(
+                                backgroundImage: NetworkImage(message['photoURL']),
+                                radius: 20,
+                              ),
+                            if (isSender && controller.userPhotoUrl.value != null)
+                              CircleAvatar(
+                                backgroundImage: NetworkImage(controller.userPhotoUrl.value),
+                                radius: 20,
+                              ),
+                            Expanded(
+                              child: Container(
+                                padding: const EdgeInsets.all(8.0),
+                                margin: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 8.0),
+                                decoration: BoxDecoration(
+                                  color: isSender ? Colors.blue[100] : Colors.green[100],
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      message['userName'],
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: isSender ? Colors.blue : Colors.green,
+                                      ),
+                                    ),
+                                    Text(message['text']),
+                                  ],
+                                ),
                               ),
                             ),
-                            Text(message['text']),
                           ],
                         ),
                       ),
@@ -70,17 +95,17 @@ class ChatView extends GetView<ChatController> {
 
                   return isSender
                       ? Dismissible(
-                          key: ValueKey(message.id),
+                          key: ValueKey(message['id']),
                           direction: DismissDirection.endToStart,
                           background: Container(
                             color: Colors.red,
                             alignment: Alignment.centerRight,
-                            padding: REdgeInsets.symmetric(horizontal: 20),
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
                             child: const Icon(Icons.delete, color: Colors.white),
                           ),
                           onDismissed: (direction) {
                             HapticFeedback.heavyImpact();
-                            controller.deleteMessage(message.id);
+                            controller.deleteMessage(message['id']);
                           },
                           child: messageWidget,
                         )
@@ -88,6 +113,11 @@ class ChatView extends GetView<ChatController> {
                 },
               ),
             ),
+            if (controller.typingUser.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text('${controller.typingUser} is typing...'),
+              ),
             Padding(
               padding: EdgeInsets.only(
                 bottom: MediaQuery.of(context).viewInsets.bottom,
@@ -106,13 +136,11 @@ class ChatView extends GetView<ChatController> {
                               : 'Enter your message',
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8.0),
-                            borderSide: const BorderSide(
-                                color: Colors.blue, width: 1.5),
+                            borderSide: const BorderSide(color: Colors.blue, width: 1.5),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8.0),
-                            borderSide: const BorderSide(
-                                color: Colors.blue, width: 1.5),
+                            borderSide: const BorderSide(color: Colors.blue, width: 1.5),
                           ),
                         ),
                         onChanged: (text) {
@@ -145,7 +173,7 @@ class ChatView extends GetView<ChatController> {
         return AlertDialog(
           titlePadding: EdgeInsets.zero,
           backgroundColor: Colors.transparent,
-          contentPadding: REdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           content: Container(
             width: Get.width,
             decoration: BoxDecoration(

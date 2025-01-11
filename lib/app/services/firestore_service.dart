@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 class FirestoreService {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
@@ -14,24 +14,12 @@ class FirestoreService {
   }
 
   Future<void> sendMessage(
-      String groupId, String message, String userName) async {
+      String groupId, String message, String userName, String? photoURL) async {
     await _db.collection('groups').doc(groupId).collection('messages').add({
       'text': message,
       'userName': userName,
+      'photoURL': photoURL,
       'timestamp': FieldValue.serverTimestamp(),
-    });
-  }
-
-  Future<DocumentSnapshot> getUserData(String userName) async {
-    return _db.collection('users').doc(userName).get();
-  }
-
-  Future<void> createUser(
-      String userName, String? email, String? displayName) async {
-    await _db.collection('users').doc(userName).set({
-      'email': email,
-      'displayName': displayName,
-      'createdAt': FieldValue.serverTimestamp(),
     });
   }
 
@@ -54,10 +42,10 @@ class FirestoreService {
       await docRef.set({'isTyping': isTyping, 'userName': userName});
     }
   }
+
   Future<void> deleteMessage(String groupId, String messageId) async {
     try {
-      await _db.collection('groups').doc(groupId).collection('messages').doc
-        (messageId).delete();
+      await _db.collection('groups').doc(groupId).collection('messages').doc(messageId).delete();
     } catch (e) {
       debugPrint('Error deleting message: $e');
     }
@@ -72,5 +60,30 @@ class FirestoreService {
     } catch (e) {
       debugPrint('Error updating message: $e');
     }
+  }
+
+  Stream<QuerySnapshot> getChatGroups() {
+    return _db.collection('groups').snapshots();
+  }
+
+  Future<void> addGroupChat(String name) async {
+    await _db.collection('groups').add({
+      'name': name,
+      'lastMessage': '',
+      'timestamp': FieldValue.serverTimestamp(),
+    });
+  }
+
+  Future<DocumentSnapshot> getUserData(String userId) async {
+    return _db.collection('users').doc(userId).get();
+  }
+
+  Future<void> createUser(String userId, String? email, String? displayName, String? photoURL) async {
+    await _db.collection('users').doc(userId).set({
+      'email': email,
+      'displayName': displayName,
+      'photoURL': photoURL,
+      'createdAt': FieldValue.serverTimestamp(),
+    });
   }
 }

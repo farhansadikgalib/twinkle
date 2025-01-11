@@ -1,8 +1,11 @@
 import 'package:get/get.dart';
+
 import '../modules/auth/bindings/auth_binding.dart';
 import '../modules/auth/views/auth_view.dart';
 import '../modules/chat/bindings/chat_binding.dart';
 import '../modules/chat/views/chat_view.dart';
+import '../modules/chat_list/bindings/chat_list_binding.dart';
+import '../modules/chat_list/views/chat_list_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
 
@@ -28,9 +31,14 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.CHAT,
-      page: () => const ChatView(),
+      page: () =>  ChatView(),
       binding: ChatBinding(),
       transition: Transition.cupertino,
+    ),
+    GetPage(
+      name: _Paths.CHAT_LIST,
+      page: () => const ChatListView(),
+      binding: ChatListBinding(),
     ),
   ];
 }
